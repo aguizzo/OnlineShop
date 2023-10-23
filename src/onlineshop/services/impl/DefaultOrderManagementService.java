@@ -1,21 +1,19 @@
 package onlineshop.services.impl;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import onlineshop.enteties.Order;
 import onlineshop.services.OrderManagementService;
 
 public class DefaultOrderManagementService implements OrderManagementService {
-	private static final int DEFAULT_ORDER_CAPACITY = 10;
 
 	private static DefaultOrderManagementService instance;
-	private Order[] orders;
-	private int lastIndex;
+	private List<Order> orders;
 	
 	public DefaultOrderManagementService() {
-		orders = new Order[DEFAULT_ORDER_CAPACITY];
-		lastIndex = 0;
+		orders = new ArrayList<Order>();
 	}
 	
 	public static OrderManagementService getInstance() {
@@ -29,29 +27,24 @@ public class DefaultOrderManagementService implements OrderManagementService {
 	public void addOrder(Order order) {
 		if (order == null)
 			return;
-		if (lastIndex >= orders.length)
-			orders = Arrays.copyOf(orders, orders.length << 1);
-		orders[lastIndex++] = order;
+		orders.add(order);
 	}
 
 	@Override
-	public Order[] getOrdersByUserId(int userId) {
-		return Arrays.stream(orders)
+	public List<Order> getOrdersByUserId(int userId) {
+		return orders.stream()
 				.filter(Objects::nonNull)
 				.filter(o -> o.getCustomerId() == userId)
-				.toArray(Order[]::new);
+				.toList();
 	}
 
 	@Override
-	public Order[] getOrders() {
-		return Arrays.stream(orders)
-				.filter(Objects::nonNull)
-				.toArray(Order[]::new);
+	public List<Order> getOrders() {
+		return orders;
 	}
 	
 	void clearServiceState() {
-		lastIndex = 0;
-		orders = new Order[DEFAULT_ORDER_CAPACITY];
+		orders.clear();
 	}
 
 }

@@ -1,6 +1,6 @@
 package onlineshop.enteties.impl;
-
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import onlineshop.enteties.Order;
 import onlineshop.enteties.Product;
@@ -10,7 +10,7 @@ public class DefaultOrder implements Order {
 	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 
 	private String creditCardNumber;
-	private Product[] products;
+	private List<Product> products;
 	private int customerId;
 	
 
@@ -32,8 +32,8 @@ public class DefaultOrder implements Order {
 	}
 
 	@Override
-	public void setProducts(Product[] products) {
-		this.products = products;
+	public void setProducts(List<Product> products) {
+		this.products = new ArrayList<>(products);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class DefaultOrder implements Order {
 	@Override
 	public String toString() {
 		return "Order: customer id - " + this.customerId + "\t" + "credit card number - " + this.creditCardNumber + "\t"
-				+ "products - " + Arrays.toString(this.products);
+				+ "products - " + this.products;
 	}
 
 }

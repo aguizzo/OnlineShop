@@ -23,7 +23,7 @@ public class MyOrdersMenu implements Menu {
 		if (loggedUser != null) {
 			int loggedUserId = loggedUser.getId();
 			var orders = orderManagementService.getOrdersByUserId(loggedUserId);
-			if (orders.length > 0)
+			if (orders.size() > 0)
 				for (Order order : orders) 
 					System.out.println(order);
 			else

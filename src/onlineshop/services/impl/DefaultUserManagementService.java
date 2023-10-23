@@ -1,7 +1,7 @@
 package onlineshop.services.impl;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import onlineshop.enteties.User;
 import onlineshop.services.UserManagementService;
@@ -12,15 +12,13 @@ public class DefaultUserManagementService implements UserManagementService {
 	private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
 	private static final String NO_ERROR_MESSAGE = "";
 	
-	private static final int DEFAULT_USERS_CAPACITY = 10;
 	
 	private static DefaultUserManagementService instance;
 	
-	private User[] users;
-	private int lastUserIndex;
+	private List<User> users;
 
 	private DefaultUserManagementService() {
-		users = new User[DEFAULT_USERS_CAPACITY];
+		users = new ArrayList<User>();
 	}
 	
 	@Override
@@ -33,11 +31,8 @@ public class DefaultUserManagementService implements UserManagementService {
 			return errorMessage;
 		}
 		
-		if (users.length <= lastUserIndex) {
-			users = Arrays.copyOf(users, users.length << 1);
-		}
+		users.add(user);
 		
-		users[lastUserIndex++] = user;
 		return NO_ERROR_MESSAGE;
 	}
 
@@ -50,15 +45,13 @@ public class DefaultUserManagementService implements UserManagementService {
 
 	
 	@Override
-	public User[] getUsers() {
-		return Arrays.stream(users)
-				.filter(Objects::nonNull)
-				.toArray(User[]::new);
+	public List<User> getUsers() {
+		return users;
 	}
 
 	@Override
 	public User getUserByEmail(String userEmail) {
-//		return Arrays.stream(users)
+//		return users.stream()
 //				.filter(Objects::nonNull)
 //				.filter(user -> user.getEmail() == userEmail)
 //				.findFirst().orElse(null);
@@ -84,7 +77,6 @@ public class DefaultUserManagementService implements UserManagementService {
 	}
 	
 	void clearServiceState() {
-		lastUserIndex = 0;
-		users = new User[DEFAULT_USERS_CAPACITY];
+		users.clear();
 	}
 }

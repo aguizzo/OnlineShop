@@ -1,12 +1,14 @@
 package onlineshop.services;
 
+import java.util.List;
+
 import onlineshop.enteties.User;
 
 public interface UserManagementService {
 
 	String registerUser(User user);
 	
-	User[] getUsers();
+	List<User> getUsers();
 
 	User getUserByEmail(String userEmail);
 
