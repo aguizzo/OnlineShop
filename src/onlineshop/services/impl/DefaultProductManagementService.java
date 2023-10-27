@@ -8,17 +8,24 @@ import java.util.List;
 import onlineshop.enteties.Product;
 import onlineshop.enteties.impl.DefaultProduct;
 import onlineshop.services.ProductManagementService;
+import onlineshop.storage.ProductStoringService;
+import onlineshop.storage.impl.DefaultProductStoringService;
 
 public class DefaultProductManagementService implements ProductManagementService {
 	
 	private static DefaultProductManagementService instance;
 	
 	private static List<Product> products;
+	private static ProductStoringService productStoringService;
 	
 	static {
-		initProducts();
+		productStoringService = DefaultProductStoringService.getInstance();
+		loadProductsFromStorage();
 	}
-
+	
+	/**
+	 * @deprecated use load products from storage
+	 */
 	private static void initProducts() {
 		products = new ArrayList<>(Arrays.asList(
 				new DefaultProduct(1, "Hardwood Oak Suffolk Internal Door", "Doors", 109.99),
@@ -61,6 +68,10 @@ public class DefaultProductManagementService implements ProductManagementService
 				return product;
 		}
 		return null;
+	}
+	
+	private static void loadProductsFromStorage() {
+		products = productStoringService.loadProducts();
 	}
 
 }

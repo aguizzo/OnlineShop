@@ -5,6 +5,8 @@ import java.util.List;
 
 import onlineshop.enteties.User;
 import onlineshop.services.UserManagementService;
+import onlineshop.storage.UserStoringService;
+import onlineshop.storage.impl.DefaultUserStoringService;
 
 public class DefaultUserManagementService implements UserManagementService {
 	
@@ -14,11 +16,11 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	
 	private static DefaultUserManagementService instance;
+	private static UserStoringService defaultUserStoringService;
 	
-	private List<User> users;
 
 	private DefaultUserManagementService() {
-		users = new ArrayList<User>();
+		defaultUserStoringService = DefaultUserStoringService.getInstance();
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ public class DefaultUserManagementService implements UserManagementService {
 			return errorMessage;
 		}
 		
-		users.add(user);
+		defaultUserStoringService.storeUser(user);
 		
 		return NO_ERROR_MESSAGE;
 	}
@@ -46,7 +48,7 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	@Override
 	public List<User> getUsers() {
-		return users;
+		return defaultUserStoringService.loadUsers();
 	}
 
 	@Override
@@ -55,7 +57,7 @@ public class DefaultUserManagementService implements UserManagementService {
 //				.filter(Objects::nonNull)
 //				.filter(user -> user.getEmail() == userEmail)
 //				.findFirst().orElse(null);
-		for (User user : users) {
+		for (User user : defaultUserStoringService.loadUsers()) {
 			if (user != null && user.getEmail().equalsIgnoreCase(userEmail))
 				return user;
 		}
@@ -66,7 +68,7 @@ public class DefaultUserManagementService implements UserManagementService {
 		if (email == null || email.isEmpty()) {
 			return EMPTY_EMAIL_ERROR_MESSAGE;
 		}
-		for (User user : users) {
+		for (User user : defaultUserStoringService.loadUsers()) {
 			if (user != null && 
 					user.getEmail() != null &&
 					user.getEmail().equalsIgnoreCase(email)) {
@@ -76,7 +78,4 @@ public class DefaultUserManagementService implements UserManagementService {
 		return NO_ERROR_MESSAGE;
 	}
 	
-	void clearServiceState() {
-		users.clear();
-	}
 }
