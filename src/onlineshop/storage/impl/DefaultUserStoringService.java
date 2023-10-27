@@ -30,10 +30,10 @@ public class DefaultUserStoringService implements UserStoringService {
 	public void storeUser(User user) {
 		Path path = Paths.get(FILE_STORAGE_FOLDER, USERS_STORAGE);
 		try {
-			Files.writeString(path, convertToStorableString(user), StandardCharsets.UTF_8, StandardOpenOption.CREATE,
+			Files.writeString(path, System.lineSeparator() + convertToStorableString(user),
+					StandardCharsets.UTF_8, StandardOpenOption.CREATE,
 					StandardOpenOption.APPEND);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -41,7 +41,7 @@ public class DefaultUserStoringService implements UserStoringService {
 
 	private String convertToStorableString(User user) {
 		return user.getId() + "," + user.getFirstName() + "," + user.getLastName() + "," + user.getPassword() + ","
-				+ user.getEmail() + "\n";
+				+ user.getEmail();
 	}
 
 	@Override
@@ -60,7 +60,6 @@ public class DefaultUserStoringService implements UserStoringService {
 						userElements[USER_EMAIL_INDEX]))
 				.collect(Collectors.toList());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Collections.emptyList();
 		}

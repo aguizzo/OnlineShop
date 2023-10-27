@@ -33,7 +33,10 @@ public class SignUpMenu implements Menu {
 		System.out.print("Please, enter your email: ");
 		var email = sc.next();
 		
+		userManagementService.getUsers(); // needed to assign the proper ID
+		
 		var user = new DefaultUser(firstName, lastName, password, email);
+		
 		
 		String errorMessage = userManagementService.registerUser(user);
 		if (errorMessage == null || errorMessage.isEmpty()) {

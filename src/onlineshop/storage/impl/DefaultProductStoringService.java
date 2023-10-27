@@ -39,7 +39,6 @@ public class DefaultProductStoringService implements ProductStoringService {
 						Double.parseDouble(productElements[PRODUCT_PRICE_INDEX])))
 				.collect(Collectors.toList());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Collections.emptyList();
 		}

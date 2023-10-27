@@ -4,17 +4,19 @@ import onlineshop.enteties.User;
 
 public class DefaultUser implements User {
 
+private static int userCounter = 0;
+	
 	private int id;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String email;
-	
-	private static int nextId = 1;
-	
+
+	{
+		id = ++userCounter;
+	}
 	
 	public DefaultUser() {
-		this.id = nextId++;
 	}
 	
 	public DefaultUser(String firstName, String lastName, String password, String email) {
@@ -26,6 +28,7 @@ public class DefaultUser implements User {
 	
 	public DefaultUser(int id, String firstName, String lastName, String password, String email) {
 		this.id = id;
+		userCounter--; // to keep sequantial id
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
@@ -34,53 +37,58 @@ public class DefaultUser implements User {
 
 	@Override
 	public String getFirstName() {
-		// <write your code here>
-		return firstName;
+		return this.firstName;
 	}
 
 	@Override
 	public String getLastName() {
-		// <write your code here>
-		return lastName;
+		return this.lastName;
 	}
 
 	@Override
 	public String getPassword() {
-		// <write your code here>
-		return password;
+		return this.password;
 	}
 
 	@Override
 	public String getEmail() {
-		// <write your code here>
-		return email;
+		return this.email;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "First Name: " + this.getFirstName() + "\t\t" +
+		return "ID: " + this.getId() + "\t\t" +
+				"First Name: " + this.getFirstName() + "\t\t" +
 				"Last Name: " + this.getLastName() + "\t\t" +
 				"Email: " + this.getEmail();
 	}
+
 	@Override
 	public void setPassword(String password) {
-		if (password != null)
-			this.password = password;
+		if (password == null) {
+			return;
+		}
+		this.password = password;
 	}
 
 	@Override
 	public void setEmail(String newEmail) {
-		if (newEmail != null)
-			this.email = newEmail;
+		if (newEmail == null) {
+			return;
+		}
+		this.email = newEmail;
 	}
 
 	@Override
 	public int getId() {
-		// <write your code here>
-		return id;
+		return this.id;
 	}
 	
 	void clearState() {
-		nextId = 1;
+		userCounter = 0;
+	}
+	
+	public static void setCounter(int updatedCount) {
+		userCounter = updatedCount;
 	}
 }

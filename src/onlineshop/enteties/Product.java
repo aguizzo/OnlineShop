@@ -1,6 +1,8 @@
 package onlineshop.enteties;
 
-public interface Product {
+import java.io.Serializable;
+
+public interface Product extends Serializable{
 
 	int getId();
 
