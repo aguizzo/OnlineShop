@@ -30,7 +30,6 @@ public class CheckoutMenu implements Menu {
 						"Thanks a lot for your purchase. Details about order delivery are sent to your email.");
 				break;
 			} 
-//			else // TODO 9999: delete output message
 //					// https://github.com/AndriiPiatakha/learnit_java_core/blob/master/src/com/itbulls/learnit/javacore/oop/exam/onlineshop/menu/impl/CheckoutMenu.java
 //				System.out.println("You've entered invalid credit card number. "
 //						+ "Valid credit card should contain 16 digits. " + "Please, try one more time.");
