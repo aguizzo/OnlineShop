@@ -1,15 +1,23 @@
 package onlineshop.enteties.impl;
 
 import onlineshop.enteties.User;
+import onlineshop.utils.annotations.Validate;
 
 public class DefaultUser implements User {
 
 private static int userCounter = 0;
 	
 	private int id;
+	
+	@Validate(pattern = "[a-zA-Z]+")
 	private String firstName;
+	
+	@Validate(pattern = "[a-zA-Z]+")
 	private String lastName;
+	
 	private String password;
+	
+	@Validate(pattern = ".+@.+")
 	private String email;
 
 	{
