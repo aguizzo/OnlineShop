@@ -35,12 +35,10 @@ public class SettingsMenu implements Menu {
 					Menu menu;
 					switch (chosenOption) {
 					case 1:
-						System.out.println("Change password");
 						menu = new ChangePasswordMenu();
 						menu.start();
 						break;
 					case 2:
-						System.out.println("Change email");
 						menu = new ChangeEmailMenu();
 						break;
 					default:
