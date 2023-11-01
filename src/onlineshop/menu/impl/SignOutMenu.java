@@ -19,8 +19,8 @@ public class SignOutMenu implements Menu {
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** Sign Out *****");
-		System.out.println("Have a nice day! Look forward to welcoming back!");		
+		System.out.println(context.getString("sign.out.header"));
+		System.out.println(context.getString("bye.msg"));		
 	}
 
 }

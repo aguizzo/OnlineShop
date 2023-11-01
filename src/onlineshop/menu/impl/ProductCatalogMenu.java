@@ -28,7 +28,7 @@ public class ProductCatalogMenu implements Menu {
 			var userInput = readUserInput();
 
 			if (context.getLoggedInUser() == null) {
-				System.out.println("You are not logged in. Please, sign in or create new account");
+				System.out.println(context.getString("not.logged.in.msg"));
 				break;
 			}
 
@@ -37,7 +37,7 @@ public class ProductCatalogMenu implements Menu {
 
 			if (userInput.equalsIgnoreCase(CHECKOUT_COMMAND)) {
 				if (context.getSessionCart().isEmpty())
-					System.out.println("Your cart is empty. Please, add product to cart first and then proceed with checkout");
+					System.out.println(context.getString("empty.cart.err.msg"));
 				else {
 					Menu menu = new CheckoutMenu();
 					menu.start();
@@ -50,21 +50,20 @@ public class ProductCatalogMenu implements Menu {
 				if (productToAddToCart != null)
 					processAddToCart(productToAddToCart);
 				else
-					System.out.println(
-							"Please, enter product ID if you want to add product to cart. Or enter 'checkout' if you want to proceed with checkout. Or enter 'menu' if you want to navigate back to the main menu.");
+					System.out.println(context.getString("enter.product.id"));
+							
 			}
 		}
 	}
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** PRODUCT CATALOG *****");
-		System.out.println(
-				"Enter product id to add it to the cart or 'menu' if you want to navigate back to the main menu");
+		System.out.println(context.getString("product.catalog.header"));
+		System.out.println(	context.getString("catalog.cta"));
 	}
 
 	private String readUserInput() {
-		System.out.print("Product ID to add to cart or enter 'checkout' to proceed with checkout: ");
+		System.out.print(context.getString("proceed.to.checkout"));
 		Scanner sc = new Scanner(System.in);
 		String userInput = sc.next();
 		return userInput;
@@ -88,8 +87,7 @@ public class ProductCatalogMenu implements Menu {
 	private void processAddToCart(Product productToAddToCart) {
 		context.getSessionCart().addProduct(productToAddToCart);
 		System.out.printf(
-				"Product %s has been added to your cart. " + "If you want to add a new product - enter the product id. "
-						+ "If you want to proceed with checkout - enter word " + "'checkout' to console %n",
+				context.getString("prouct.added.to.cart"),
 				productToAddToCart.getProductName());
 	}
 

@@ -22,25 +22,25 @@ public class SignInMenu implements Menu {
 		printMenuHeader();
 		Scanner sc = new Scanner(System.in);
 
-		System.out.print("Please, enter your email: ");
+		System.out.print(context.getString("please.enter.email"));
 		String userEmail = sc.next();
 
-		System.out.print("Please, enter your password: ");
+		System.out.print(context.getString("please.enter.pass"));
 		String userPassword = sc.next();
 		
 		var user = userManagementService.getUserByEmail(userEmail);
 		if (user != null && userPassword.equals(user.getPassword())) {
-			System.out.printf("Glad to see you back %s %s", user.getFirstName(),
+			System.out.printf(context.getString("glad.to.see.you.back"), user.getFirstName(),
 					user.getLastName() + System.lineSeparator());
 			context.setLoggedInUser(user);
 		}
 		else
-			System.out.println("Unfortunately, such login and password doesn't exist");
+			System.out.println(context.getString("login.and.password.not.exist"));
 	}
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** Sign In *****");	
+		System.out.println(context.getString("sign.in.header"));	
 	}
 
 }

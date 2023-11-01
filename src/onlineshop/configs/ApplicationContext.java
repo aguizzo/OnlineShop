@@ -1,5 +1,7 @@
 package onlineshop.configs;
 
+import java.util.ResourceBundle;
+
 import onlineshop.enteties.Cart;
 import onlineshop.enteties.User;
 import onlineshop.enteties.impl.DefaultCart;
@@ -13,7 +15,11 @@ public class ApplicationContext {
 	private Menu mainMenu;
 	private Cart sessionCart;
 	
+	private ResourceBundle rb;
+	private static final String RESOURCE_BUNDLE_BASE_NAME = "i18n.labels";
+	
 	private ApplicationContext() {
+		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
 	}
 	
 	public void setLoggedInUser(User user) {
@@ -47,6 +53,14 @@ public class ApplicationContext {
 			this.sessionCart = new DefaultCart();
 		}
 		return this.sessionCart;
+	}
+	
+	public String getString(String key) {
+		return rb.getString(key);
+	}
+
+	public void changeLanguage() {
+		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
 	}
 
 }

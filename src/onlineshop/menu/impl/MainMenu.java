@@ -1,5 +1,6 @@
 package onlineshop.menu.impl;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import onlineshop.Main;
@@ -7,19 +8,9 @@ import onlineshop.configs.ApplicationContext;
 import onlineshop.menu.Menu;
 
 public class MainMenu implements Menu {
-
+	
 	public static final String MENU_COMMAND = "menu";
-
-	private static final String MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER = "Please, enter number in console to proceed."
-			+ System.lineSeparator() + "1. Sign Up" + System.lineSeparator() + "2. Sign In" + System.lineSeparator()
-			+ "3. Product Catalog" + System.lineSeparator() + "4. My Orders" + System.lineSeparator() + "5. Settings"
-			+ System.lineSeparator() + "6. Customer List";
-
-	private static final String MAIN_MENU_TEXT_FOR_LOGGED_IN_USER = "Please, enter number in console to proceed."
-			+ System.lineSeparator() + "1. Sign Up" + System.lineSeparator() + "2. Sign Out" + System.lineSeparator()
-			+ "3. Product Catalog" + System.lineSeparator() + "4. My Orders" + System.lineSeparator() + "5. Settings"
-			+ System.lineSeparator() + "6. Customer List" + System.lineSeparator() + "7. Reset Password";
-
+	
 	private ApplicationContext context;
 
 	{
@@ -33,12 +24,12 @@ public class MainMenu implements Menu {
 			context.setMainMenu(this);
 		}
 
-		Menu menuToNavigate = null; // Garbage collector do your job!
+		Menu menuToNavigate = null;
 
 		while (true) {
 			printMenuHeader();
 			var sc = new Scanner(System.in);
-			System.out.print("User input: ");
+			System.out.print(context.getString("user.input"));
 			String userInput = sc.next();
 			
 			if (userInput.equalsIgnoreCase(Main.EXIT_COMMAND))
@@ -79,14 +70,17 @@ public class MainMenu implements Menu {
 				case 7:
 					menuToNavigate = new ResetPasswordMenu();
 					break; 
+				case 8:
+					menuToNavigate = new ChangeLanguageMenu();
+					break;
 				default:
-					System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time");
+					System.out.println(context.getString("err.msg"));
 					continue;
 				}
 				menuToNavigate.start();
 			} 
 			else
-				System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time");
+				System.out.println(context.getString("err.msg"));
 		}
 
 //		System.out.println("Bye!");
@@ -95,11 +89,10 @@ public class MainMenu implements Menu {
 	@Override
 	public void printMenuHeader() {
 		System.out.println("***** MAIN MENU *****");
-		if (context.getLoggedInUser() == null) {
-			System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
-		} else {
-			System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
-		}
+		if (context.getLoggedInUser() == null) 
+			System.out.println(context.getString("menu.for.not.logged.in.user"));
+		else 
+			System.out.println(context.getString("menu.for.logged.in.user"));
 	}
 
 }

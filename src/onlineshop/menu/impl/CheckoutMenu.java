@@ -27,7 +27,7 @@ public class CheckoutMenu implements Menu {
 
 			if (addOrder(userInput)) {
 				System.out.println(
-						"Thanks a lot for your purchase. Details about order delivery are sent to your email.");
+						context.getString("thank.you.msg"));
 				break;
 			} 
 //					// https://github.com/AndriiPiatakha/learnit_java_core/blob/master/src/com/itbulls/learnit/javacore/oop/exam/onlineshop/menu/impl/CheckoutMenu.java
@@ -52,8 +52,8 @@ public class CheckoutMenu implements Menu {
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** CHECKOUT *****");
-		System.out.print("Enter your credit card number without spaces and press enter if you confirm purchase: ");
+		System.out.println(context.getString("checkout.menu.header"));
+		System.out.print(context.getString("enter.credit.card.number.cta"));
 	}
 
 }

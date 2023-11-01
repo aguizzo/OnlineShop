@@ -25,7 +25,7 @@ public class CustomerListMenu implements Menu {
 		List<User> users = userManagementService.getUsers();
 		
 		if (users == null || users.size() == 0) 
-			System.out.println("Unfortunately, there are no customers.");
+			System.out.println(context.getString("no.users.msg"));
 		else 
 			for (User user : users) 
 				System.out.println(user);
@@ -33,7 +33,7 @@ public class CustomerListMenu implements Menu {
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** USERS *****");	
+		System.out.println(context.getString("customer.list.header"));	
 	}
 
 }

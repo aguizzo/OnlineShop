@@ -19,13 +19,13 @@ public class ChangeEmailMenu implements Menu {
 		var sc = new Scanner(System.in);
 		String userInput = sc.next();
 		context.getLoggedInUser().setEmail(userInput);
-		System.out.println("Your email has been successfully changed");
+		System.out.println(context.getString("mail.changed.msg"));
 	}
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** CHANGE EMAIL *****");
-		System.out.print("Enter new email: ");
+		System.out.println(context.getString("change.email.header"));
+		System.out.print(context.getString("enter.new.email.cta"));
 	}
 
 }

@@ -3,6 +3,7 @@ package onlineshop.menu.impl;
 import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
+import onlineshop.configs.ApplicationContext;
 import onlineshop.enteties.User;
 import onlineshop.menu.Menu;
 import onlineshop.services.ResetPasswordService;
@@ -14,10 +15,12 @@ public class ResetPasswordMenu implements Menu {
 	
 	private ResetPasswordService resetPasswordService;
 	private UserManagementService userManagementService;
+	private ApplicationContext context;
 	
 	{
 		resetPasswordService = new DefaultResetPasswordService();
 		userManagementService = DefaultUserManagementService.getInstance();
+		context =  ApplicationContext.getInstance();
 	}
 	
 
@@ -26,8 +29,7 @@ public class ResetPasswordMenu implements Menu {
 		printMenuHeader();
 		var sc = new Scanner(System.in);
 		String userInput = sc.next();
-		System.out.println("Your password has been sent to your email. Please, check mailbox. "
-				+ "You will receive the email within the next 5 minutes");
+		System.out.println(context.getString("pass.sent.to.email"));
 		CompletableFuture.runAsync(() -> {
 			try {
 				Thread.sleep(5000);
@@ -42,8 +44,8 @@ public class ResetPasswordMenu implements Menu {
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** RESET PASSWORD MENU *****");
-		System.out.print("Please, enter your email: ");
+		System.out.println(context.getString("reset.pass.header"));
+		System.out.print(context.getString("enter.your.email.msg"));
 	}
 
 }

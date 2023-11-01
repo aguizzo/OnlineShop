@@ -23,7 +23,7 @@ public class SettingsMenu implements Menu {
 			if (context.getLoggedInUser() != null) {
 				System.out.println(SETTINGS);
 				System.out.print(
-						"Please, enter option or type 'menu' to navigate back to the main menu: ");
+						context.getString("enter.option"));
 				var userInput = sc.next();
 				
 				if (userInput.equalsIgnoreCase(MainMenu.MENU_COMMAND))
@@ -42,13 +42,13 @@ public class SettingsMenu implements Menu {
 						menu = new ChangeEmailMenu();
 						break;
 					default:
-						System.out.println("Only 1, 2 is allowed. Try one more time");
+						System.out.println(context.getString("settings.option.validation.msg"));
 						continue;
 					}
 					menu.start();
 				}
 				else
-					System.out.println("Only 1, 2 is allowed. Try one more time");
+					System.out.println(context.getString("settings.option.validation.msg"));;
 			}
 			else {
 				System.out.println("Please, log in or create new account to change your account settings");
@@ -59,7 +59,7 @@ public class SettingsMenu implements Menu {
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** SETTINGS *****");
+		System.out.println(context.getString("settings.menu.header"));
 	}
 
 }

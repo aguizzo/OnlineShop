@@ -19,13 +19,13 @@ public class ChangePasswordMenu implements Menu {
 		var sc = new Scanner(System.in);
 		String userInput = sc.next();
 		context.getLoggedInUser().setPassword(userInput);
-		System.out.println("Your password has been successfully changed");
+		System.out.println(context.getString("change.password.msg"));
 	}
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** CHANGE PASSWORD *****");
-		System.out.print("Enter new password: ");		
+		System.out.println(context.getString("change.password.header"));
+		System.out.print(context.getString("enter.new.pass.cta"));		
 	}
 
 }

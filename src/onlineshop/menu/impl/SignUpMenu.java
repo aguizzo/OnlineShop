@@ -1,5 +1,6 @@
 package onlineshop.menu.impl;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import onlineshop.configs.ApplicationContext;
@@ -24,13 +25,13 @@ public class SignUpMenu implements Menu {
 		
 		var sc = new Scanner(System.in);
 
-		System.out.print("Please, enter your first name: ");
+		System.out.print(context.getString("enter.your.first.name"));
 		var firstName = sc.next();
-		System.out.print("Please, enter your last name: ");
+		System.out.print(context.getString("enter.your.last.name"));
 		var lastName = sc.next();
-		System.out.print("Please, enter your password: ");
+		System.out.print(context.getString("enter.your.pass"));
 		var password = sc.next();
-		System.out.print("Please, enter your email: ");
+		System.out.print(context.getString("enter.your.email"));
 		var email = sc.next();
 		
 		userManagementService.getUsers(); // needed to assign the proper ID
@@ -41,7 +42,7 @@ public class SignUpMenu implements Menu {
 		String errorMessage = userManagementService.registerUser(user);
 		if (errorMessage == null || errorMessage.isEmpty()) {
 			context.setLoggedInUser(user);
-			System.out.println("New user is created");
+			System.out.println(context.getString("user.created.msg"));
 		} else {
 			System.out.println(errorMessage);
 		}
@@ -49,7 +50,7 @@ public class SignUpMenu implements Menu {
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** Sign Up *****");
+		System.out.println(context.getString("sign.up.header"));
 	}
 
 }
