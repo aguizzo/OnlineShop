@@ -8,6 +8,7 @@ import onlineshop.enteties.impl.DefaultUser;
 import onlineshop.menu.Menu;
 import onlineshop.services.UserManagementService;
 import onlineshop.services.impl.DefaultUserManagementService;
+import onlineshop.services.impl.MySqlUserManagementService;
 
 public class SignUpMenu implements Menu {
 
@@ -15,7 +16,7 @@ public class SignUpMenu implements Menu {
 	private ApplicationContext context;
 
 	{
-		userManagementService = DefaultUserManagementService.getInstance();
+		userManagementService = MySqlUserManagementService.getInstance();
 		context = ApplicationContext.getInstance();
 	}
 
@@ -33,14 +34,16 @@ public class SignUpMenu implements Menu {
 		var password = sc.next();
 		System.out.print(context.getString("enter.your.email"));
 		var email = sc.next();
+		// TODO use resource bundle
+		System.out.print("Please, enter your credit card: ");
+		var creditcard = sc.next();
 		
-		userManagementService.getUsers(); // needed to assign the proper ID
 		
-		var user = new DefaultUser(firstName, lastName, password, email);
+		var user = new DefaultUser(firstName, lastName, password, email, creditcard);
 		
 		
 		String errorMessage = userManagementService.registerUser(user);
-		if (errorMessage == null || errorMessage.isEmpty()) {
+		if (errorMessage != null && errorMessage.equals(MySqlUserManagementService.SUCCESSFULL_REGISTRATION_MESSAGE)) {
 			context.setLoggedInUser(user);
 			System.out.println(context.getString("user.created.msg"));
 		} else {

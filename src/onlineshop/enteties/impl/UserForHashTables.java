@@ -110,5 +110,59 @@ public class UserForHashTables implements User {
 				&& Objects.equals(password, other.password);
 	}
 
+	@Override
+	public void setFirstName(String firstName) {
+		
+		
+	}
+
+	@Override
+	public void setLastName(String lastName) {
+		
+		
+	}
+
+	@Override
+	public void setId(int id) {
+		
+		
+	}
+
+	@Override
+	public String getRoleName() {
+		
+		return null;
+	}
+
+	@Override
+	public void setRoleName(String roleName) {
+		
+		
+	}
+
+	@Override
+	public double getMoney() {
+		
+		return 0;
+	}
+
+	@Override
+	public void setMoney(double money) {
+		
+		
+	}
+
+	@Override
+	public String getCreditCard() {
+		
+		return null;
+	}
+
+	@Override
+	public void setCreditCard(String creditCard) {
+		
+		
+	}
+
 
 }

@@ -16,7 +16,7 @@ public class DefaultMailSender implements MailSender {
 
 	@Override
 	public void sendEmail(String sendTo, String messageToSend) {
-		// TODO Auto-generated method stub
+		
 		System.out.println(sendTo + ": " + messageToSend);
 	}
 

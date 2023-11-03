@@ -8,6 +8,7 @@ import onlineshop.enteties.impl.DefaultUser;
 import onlineshop.services.UserManagementService;
 import onlineshop.storage.UserStoringService;
 import onlineshop.storage.impl.DefaultUserStoringService;
+import onlineshop.utils.mail.MailSender;
 
 public class DefaultUserManagementService implements UserManagementService {
 
@@ -17,8 +18,11 @@ public class DefaultUserManagementService implements UserManagementService {
 
 	private static DefaultUserManagementService instance;
 	private static UserStoringService defaultUserStoringService;
+	
+	private MailSender mailSender;
 
 	private DefaultUserManagementService() {
+		mailSender = DefaultMailSender.getInstance();
 		defaultUserStoringService = DefaultUserStoringService.getInstance();
 	}
 
@@ -76,6 +80,12 @@ public class DefaultUserManagementService implements UserManagementService {
 			}
 		}
 		return NO_ERROR_MESSAGE;
+	}
+
+	@Override
+	public void resetPasswordForUser(User user) {
+		mailSender.sendEmail(user.getEmail(), "Please, use this password to login: " + user.getPassword());
+		
 	}
 
 }

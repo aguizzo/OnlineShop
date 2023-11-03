@@ -13,12 +13,10 @@ import onlineshop.services.impl.DefaultUserManagementService;
 
 public class ResetPasswordMenu implements Menu {
 	
-	private ResetPasswordService resetPasswordService;
 	private UserManagementService userManagementService;
 	private ApplicationContext context;
 	
 	{
-		resetPasswordService = new DefaultResetPasswordService();
 		userManagementService = DefaultUserManagementService.getInstance();
 		context =  ApplicationContext.getInstance();
 	}
@@ -34,11 +32,10 @@ public class ResetPasswordMenu implements Menu {
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			User user = userManagementService.getUserByEmail(userInput);
-			resetPasswordService.resetPasswordForUser(user);
+			userManagementService.resetPasswordForUser(user);
 		});
 	}
 

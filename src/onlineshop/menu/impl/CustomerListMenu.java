@@ -7,6 +7,7 @@ import onlineshop.enteties.User;
 import onlineshop.menu.Menu;
 import onlineshop.services.UserManagementService;
 import onlineshop.services.impl.DefaultUserManagementService;
+import onlineshop.services.impl.MySqlUserManagementService;
 
 public class CustomerListMenu implements Menu {
 
@@ -15,7 +16,7 @@ public class CustomerListMenu implements Menu {
 	private UserManagementService userManagementService;
 	
 	{
-		userManagementService = DefaultUserManagementService.getInstance();
+		userManagementService = MySqlUserManagementService.getInstance();
 		context = ApplicationContext.getInstance();
 	}
 	
