@@ -6,7 +6,7 @@ import onlineshop.configs.ApplicationContext;
 import onlineshop.enteties.Product;
 import onlineshop.menu.Menu;
 import onlineshop.services.ProductManagementService;
-import onlineshop.services.impl.DefaultProductManagementService;
+import onlineshop.services.impl.MySqlProductManagementService;
 
 public class ProductCatalogMenu implements Menu {
 
@@ -16,7 +16,7 @@ public class ProductCatalogMenu implements Menu {
 
 	{
 		context = ApplicationContext.getInstance();
-		productManagementService = DefaultProductManagementService.getInstance();
+		productManagementService = MySqlProductManagementService.getInstance();
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class ProductCatalogMenu implements Menu {
 	private void processAddToCart(Product productToAddToCart) {
 		context.getSessionCart().addProduct(productToAddToCart);
 		System.out.printf(
-				context.getString("prouct.added.to.cart"),
+				context.getString("product.added.to.cart"),
 				productToAddToCart.getProductName());
 	}
 

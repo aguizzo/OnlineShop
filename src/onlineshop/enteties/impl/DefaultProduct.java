@@ -11,7 +11,7 @@ public class DefaultProduct implements Product {
 
 	public DefaultProduct() {
 	}
-
+	
 	public DefaultProduct(int id, String productName, String categoryName, double price) {
 		this.id = id;
 		this.productName = productName;
@@ -21,34 +21,48 @@ public class DefaultProduct implements Product {
 
 	@Override
 	public String toString() {
-		return "Product id=" + id + ", product name=" + productName + ", category name=" + categoryName + ", price="
-				+ price;
+		return "Product id=" + id + ", product name=" + productName
+				+ ", category name=" + categoryName + ", price=" + price;
 	}
 
 	@Override
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	@Override
 	public String getProductName() {
-		return productName;
+		return this.productName;
 	}
 
 	@Override
 	public String getCategoryName() {
-		return categoryName;
+		return this.categoryName;
 	}
 
 	@Override
 	public double getPrice() {
-		return price;
+		return this.price;
 	}
 
 	@Override
 	public void setPrice(double price) {
 		this.price = price;
-		
+	}
+
+	@Override
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	@Override
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }

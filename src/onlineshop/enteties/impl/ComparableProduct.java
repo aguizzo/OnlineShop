@@ -55,4 +55,22 @@ public class ComparableProduct implements Product, Comparable<Product> {
 		return this.id - otherProduct.getId();
 	}
 
+	@Override
+	public void setId(int id) {
+	
+		
+	}
+
+	@Override
+	public void setProductName(String productName) {
+		
+		
+	}
+
+	@Override
+	public void setCategoryName(String categoryName) {
+		
+		
+	}
+
 }
