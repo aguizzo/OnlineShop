@@ -5,25 +5,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import onlineshop.enteties.Order;
-import onlineshop.services.OrderManagementService;
+import onlineshop.enteties.Purchase;
+import onlineshop.services.PurchaseManagementService;
 import onlineshop.storage.OrderStoringService;
 import onlineshop.storage.impl.DefaultOrderStoringService;
 
-public class DefaultOrderManagementService implements OrderManagementService {
+public class DefaultOrderManagementService implements PurchaseManagementService {
 
 	private static DefaultOrderManagementService instance;
-	private List<Order> orders;
+	private List<Purchase> orders;
 	private OrderStoringService orderStoringService;
 	
 	{
 		orderStoringService = DefaultOrderStoringService.getInstance();
 		orders = orderStoringService.loadOrders();
 		if (orders.isEmpty())
-			orders = new ArrayList<Order>();
+			orders = new ArrayList<Purchase>();
 	}
 	
-	public static OrderManagementService getInstance() {
+	public static PurchaseManagementService getInstance() {
 		if (instance == null) {
 			instance = new DefaultOrderManagementService();
 		}
@@ -31,7 +31,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
 	}
 
 	@Override
-	public void addOrder(Order order) {
+	public void addPurchase(Purchase order) {
 		if (order == null) {
 			return;
 		}
@@ -40,7 +40,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
 	}
 
 	@Override
-	public List<Order> getOrdersByUserId(int userId) {
+	public List<Purchase> getPurchasesByUserId(int userId) {
 		return orderStoringService.loadOrders().stream()
 				.filter(Objects::nonNull)
 				.filter(order -> order.getCustomerId() == userId)
@@ -48,7 +48,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
 	}
 
 	@Override
-	public List<Order> getOrders() {
+	public List<Purchase> getPurchases() {
 		if (orders == null || orders.size() == 0) {
 			orders = orderStoringService.loadOrders();
 		}

@@ -2,10 +2,10 @@ package onlineshop.enteties.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import onlineshop.enteties.Order;
+import onlineshop.enteties.Purchase;
 import onlineshop.enteties.Product;
 
-public class DefaultOrder implements Order {
+public class DefaultPurchase implements Purchase {
 
 	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 
@@ -50,6 +50,12 @@ public class DefaultOrder implements Order {
 	public String toString() {
 		return "Order: customer id - " + this.customerId + "\t" + "credit card number - " + this.creditCardNumber + "\t"
 				+ "products - " + this.products;
+	}
+
+	@Override
+	public List<Product> getProducts() {
+		ArrayList<Product> copy = new ArrayList<Product>(this.products);
+		return copy;
 	}
 
 }

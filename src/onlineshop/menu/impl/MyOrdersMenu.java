@@ -2,18 +2,18 @@ package onlineshop.menu.impl;
 
 
 import onlineshop.configs.ApplicationContext;
-import onlineshop.enteties.Order;
+import onlineshop.enteties.Purchase;
 import onlineshop.menu.Menu;
-import onlineshop.services.OrderManagementService;
-import onlineshop.services.impl.DefaultOrderManagementService;
+import onlineshop.services.PurchaseManagementService;
+import onlineshop.services.impl.MySqlPurchaseManagementService;
 
 public class MyOrdersMenu implements Menu {
 
 	private ApplicationContext context;
-	private OrderManagementService orderManagementService;
+	private PurchaseManagementService purchaseManagementService;
 	{
 		context = ApplicationContext.getInstance();
-		orderManagementService = DefaultOrderManagementService.getInstance();
+		purchaseManagementService = MySqlPurchaseManagementService.getInstance();
 	}
 
 	@Override
@@ -22,9 +22,9 @@ public class MyOrdersMenu implements Menu {
 		var loggedUser = context.getLoggedInUser();
 		if (loggedUser != null) {
 			int loggedUserId = loggedUser.getId();
-			var orders = orderManagementService.getOrdersByUserId(loggedUserId);
-			if (orders.size() > 0)
-				for (Order order : orders) 
+			var orders = purchaseManagementService.getPurchasesByUserId(loggedUserId);
+			if (orders != null && orders.size() > 0)
+				for (Purchase order : orders) 
 					System.out.println(order);
 			else
 				System.out.println("Unfortunately, you don't have any orders yet. Navigate back to main menu to place a new order");

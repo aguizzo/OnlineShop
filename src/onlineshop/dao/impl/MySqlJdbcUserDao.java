@@ -112,7 +112,8 @@ public class MySqlJdbcUserDao implements UserDao {
 		userDto.setPassword(rs.getString(PASSWORD));
 		userDto.setRoleDto(roleDao.getRoleById(rs.getInt(ROLE)));
 		userDto.setMoney(rs.getBigDecimal(MONEY));
-
+		userDto.setCreditCard(rs.getString(CREDIT_CARD));
+		
 		return userDto;
 	}
 

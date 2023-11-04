@@ -2,11 +2,11 @@ package onlineshop.storage;
 
 import java.util.List;
 
-import onlineshop.enteties.Order;
+import onlineshop.enteties.Purchase;
 
 public interface OrderStoringService {
 	
-	void saveOrders(List<Order> order);
+	void saveOrders(List<Purchase> order);
 	
-	List<Order> loadOrders();
+	List<Purchase> loadOrders();
 }

@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.List;
 
-import onlineshop.enteties.Order;
+import onlineshop.enteties.Purchase;
 import onlineshop.storage.OrderStoringService;
 
 public class DefaultOrderStoringService implements OrderStoringService {
@@ -24,7 +24,7 @@ public class DefaultOrderStoringService implements OrderStoringService {
 	}
 
 	@Override
-	public void saveOrders(List<Order> orders) {
+	public void saveOrders(List<Purchase> orders) {
 		try (var oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
 			oos.writeObject(orders);
 		} catch (IOException e) {
@@ -33,9 +33,9 @@ public class DefaultOrderStoringService implements OrderStoringService {
 	}
 
 	@Override
-	public List<Order> loadOrders() {
+	public List<Purchase> loadOrders() {
 		try (var ois = new ObjectInputStream(new FileInputStream(PATH))) {
-			return (List<Order>) ois.readObject();
+			return (List<Purchase>) ois.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			return Collections.emptyList() ;

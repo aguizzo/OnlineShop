@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 import onlineshop.configs.ApplicationContext;
 import onlineshop.menu.Menu;
-import onlineshop.services.OrderManagementService;
-import onlineshop.services.impl.DefaultOrderManagementService;
-import onlineshop.enteties.impl.DefaultOrder;
+import onlineshop.services.PurchaseManagementService;
+import onlineshop.services.impl.MySqlPurchaseManagementService;
+import onlineshop.enteties.impl.DefaultPurchase;
 
 public class CheckoutMenu implements Menu {
 
 	private ApplicationContext context;
-	private OrderManagementService orderManagementService;
+	private PurchaseManagementService purchaseManagementService;
 
 	{
 		context = ApplicationContext.getInstance();
-		orderManagementService = DefaultOrderManagementService.getInstance();
+		purchaseManagementService = MySqlPurchaseManagementService.getInstance();
 	}
 
 	@Override
@@ -37,15 +37,16 @@ public class CheckoutMenu implements Menu {
 	}
 
 	private boolean addOrder(String creditCard) {
-		var order = new DefaultOrder();
+		var order = new DefaultPurchase();
 		if (!order.isCreditCardNumberValid(creditCard)) {
 			return false;
 		}
-		order.setCreditCardNumber(creditCard);
+		// TODO the program ask to introduce a credit card number but it is stored in user data
+		order.setCreditCardNumber(context.getLoggedInUser().getCreditCard());
 		order.setCustomerId(context.getLoggedInUser().getId());
 		order.setProducts(context.getSessionCart().getProducts());
 		
-		orderManagementService.addOrder(order);
+		purchaseManagementService.addPurchase(order);
 		context.getSessionCart().clear();
 		return true;
 	}
