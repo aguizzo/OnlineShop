@@ -1,4 +1,4 @@
-package onlineshop.services.impl;
+package onlineshop.utils.mail.impl;
 
 import onlineshop.utils.mail.MailSender;
 

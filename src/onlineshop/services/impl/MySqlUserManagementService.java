@@ -8,6 +8,7 @@ import onlineshop.dto.converter.UserDtoToUserConverter;
 import onlineshop.enteties.User;
 import onlineshop.services.UserManagementService;
 import onlineshop.utils.mail.MailSender;
+import onlineshop.utils.mail.impl.DefaultMailSender;
 
 public class MySqlUserManagementService implements UserManagementService {
 	

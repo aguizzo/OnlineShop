@@ -6,10 +6,8 @@ import java.util.concurrent.CompletableFuture;
 import onlineshop.configs.ApplicationContext;
 import onlineshop.enteties.User;
 import onlineshop.menu.Menu;
-import onlineshop.services.ResetPasswordService;
 import onlineshop.services.UserManagementService;
-import onlineshop.services.impl.DefaultResetPasswordService;
-import onlineshop.services.impl.DefaultUserManagementService;
+import onlineshop.services.impl.MySqlUserManagementService;
 
 public class ResetPasswordMenu implements Menu {
 	
@@ -17,7 +15,7 @@ public class ResetPasswordMenu implements Menu {
 	private ApplicationContext context;
 	
 	{
-		userManagementService = DefaultUserManagementService.getInstance();
+		userManagementService = MySqlUserManagementService.getInstance();
 		context =  ApplicationContext.getInstance();
 	}
 	
